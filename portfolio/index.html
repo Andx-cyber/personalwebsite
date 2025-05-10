@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Doe | Portfolio</title>
+    <meta name="description" content="Frontend Developer & UI/UX Designer portfolio showcasing projects and skills">
+    <meta property="og:title" content="John Doe | Portfolio">
+    <meta property="og:description" content="Frontend Developer & UI/UX Designer portfolio showcasing projects and skills">
+    <meta property="og:type" content="website">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="./assets/favicon.ico" type="image/x-icon">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Custom Styles -->
+    <style>
+        .typing::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .project-card {
+            transition: transform 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .skill-icon {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        
+        .skill-icon:hover {
+            transform: scale(1.1);
+            opacity: 0.9;
+        }
+        
+        /* Hide scrollbar but keep functionality */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: rgba(155, 155, 155, 0.5);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(155, 155, 155, 0.8);
+        }
+    </style>
+</head>
+
+<body class="font-sans bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <!-- Scroll to top button -->
+    <button id="scrollToTop" class="fixed bottom-8 right-8 bg-primary-500 text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300 z-50">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Header/Navbar -->
+    <header class="fixed top-0 left-0 w-full bg-white dark:bg-gray-900 shadow-sm z-50 transition-colors duration-300">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-primary-600 dark:text-primary-400">JD</a>
+            
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Home</a>
+                <a href="#about" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">About</a>
+                <a href="#projects" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Projects</a>
+                <a href="#skills" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Skills</a>
+                <a href="#contact" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Contact</a>
+                <button id="themeToggle" class="p-2 rounded-full bg-gray-100 dark:bg-gray-800 focus:outline-none">
+                    <i class="fas fa-sun text-yellow-500 dark:hidden"></i>
+                    <i class="fas fa-moon text-blue-300 hidden dark:block"></i>
+                </button>
+            </div>
+            
+            <button id="mobileMenuBtn" class="md:hidden text-gray-600 dark:text-gray-300 focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </nav>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="md:hidden bg-white dark:bg-gray-900 shadow-md absolute w-full left-0 top-full py-4 px-6 hidden transition-all duration-300">
+            <div class="flex flex-col space-y-4">
+                <a href="#home" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Home</a>
+                <a href="#about" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">About</a>
+                <a href="#projects" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Projects</a>
+                <a href="#skills" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Skills</a>
+                <a href="#contact" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Contact</a>
+                <button id="mobileThemeToggle" class="p-2 rounded-full bg-gray-100 dark:bg-gray-800 focus:outline-none self-start">
+                    <i class="fas fa-sun text-yellow-500 dark:hidden"></i>
+                    <i class="fas fa-moon text-blue-300 hidden dark:block"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20 pb-16 px-6 bg-gradient-to-br from-white to-gray-100 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-1/2 mb-10 md:mb-0 text-center md:text-left">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 opacity-0" id="heroTitle">
+                        Hi, I'm <span class="text-primary-500 dark:text-primary-400">John Doe</span>
+                    </h1>
+                    <h2 class="text-xl md:text-2xl lg:text-3xl text-gray-600 dark:text-gray-300 mb-6 opacity-0" id="heroSubtitle">
+                        <span class="typing" id="typingText">Frontend Developer & UI/UX Designer</span>
+                    </h2>
+                    <p class="text-gray-600 dark:text-gray-400 mb-8 max-w-lg mx-auto md:mx-0 opacity-0" id="heroText">
+                        I create beautiful, responsive websites with clean code and user-centered design. Let's build something amazing together.
+                    </p>
+                    <div class="flex flex-wrap justify-center md:justify-start gap-4 opacity-0" id="heroButtons">
+                        <a href="#projects" class="px-6 py-3 bg-primary-500 hover:bg-primary-600 text-white rounded-full transition-colors duration-300 shadow-md">
+                            View Projects
+                        </a>
+                        <a href="#contact" class="px-6 py-3 bg-transparent border-2 border-primary-500 text-primary-500 dark:text-primary-400 hover:bg-primary-500 hover:text-white rounded-full transition-colors duration-300">
+                            Contact Me
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center md:justify-end opacity-0" id="heroImage">
+                    <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center overflow-hidden">
+                        <img src="./assets/profile.png" alt="John Doe" class="w-56 h-56 md:w-72 md:h-72 object-cover rounded-full border-4 border-white dark:border-gray-800 shadow-lg">
+                        <div class="absolute inset-0 border-4 border-primary-300 dark:border-primary-700 rounded-full animate-pulse"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-6 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 relative">
+                About Me
+                <span class="block w-20 h-1 bg-primary-500 mx-auto mt-4"></span>
+            </h2>
+            
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-2/5 opacity-0" id="aboutImage">
+                    <img src="./assets/about.png" alt="About John Doe" class="w-full max-w-md mx-auto rounded-lg shadow-xl">
+                </div>
+                
+                <div class="md:w-3/5">
+                    <div class="opacity-0" id="aboutText">
+                        <h3 class="text-2xl font-semibold mb-4 text-primary-600 dark:text-primary-400">My Journey</h3>
+                        <p class="text-gray-700 dark:text-gray-300 mb-6">
+                            I'm a passionate frontend developer with 5 years of experience creating modern web applications. 
+                            I specialize in building responsive, accessible, and performant websites that provide exceptional user experiences.
+                        </p>
+                        <p class="text-gray-700 dark:text-gray-300 mb-8">
+                            My approach combines clean code, creative problem-solving, and attention to detail. 
+                            I'm constantly learning new technologies and techniques to stay at the forefront of web development.
+                        </p>
+                    </div>
+                    
+                    <div class="opacity-0" id="timeline">
+                        <h3 class="text-2xl font-semibold mb-6 text-primary-600 dark:text-primary-400">Experience</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex">
+                                <div class="flex flex-col items-center mr-4">
+                                    <div class="w-3 h-3 bg-primary-500 rounded-full"></div>
+                                    <div class="w-0.5 h-full bg-primary-300 dark:bg-primary-700"></div>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium text-gray-800 dark:text-gray-200">Senior Frontend Developer</h4>
+                                    <p class="text-gray-600 dark:text-gray-400">TechCorp Inc. | 2021 - Present</p>
+                                    <p class="text-gray-700 dark:text-gray-300 mt-2">
+                                        Leading frontend development for enterprise applications, mentoring junior developers, and implementing best practices.
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex">
+                                <div class="flex flex-col items-center mr-4">
+                                    <div class="w-3 h-3 bg-primary-500 rounded-full"></div>
+                                    <div class="w-0.5 h-full bg-primary-300 dark:bg-primary-700"></div>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium text-gray-800 dark:text-gray-200">Frontend Developer</h4>
+                                    <p class="text-gray-600 dark:text-gray-400">WebSolutions | 2018 - 2021</p>
+                                    <p class="text-gray-700 dark:text-gray-300 mt-2">
+                                        Developed responsive websites and web applications for various clients using modern JavaScript frameworks.
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex">
+                                <div class="flex flex-col items-center mr-4">
+                                    <div class="w-3 h-3 bg-primary-500 rounded-full"></div>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium text-gray-800 dark:text-gray-200">UI/UX Designer</h4>
+                                    <p class="text-gray-600 dark:text-gray-400">DesignStudio | 2016 - 2018</p>
+                                    <p class="text-gray-700 dark:text-gray-300 mt-2">
+                                        Created user interfaces and experiences for web and mobile applications, collaborating with development teams.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-6 bg-white dark:bg-gray-900 transition-colors duration-300">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 relative">
+                My Projects
+                <span class="block w-20 h-1 bg-primary-500 mx-auto mt-4"></span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden opacity-0">
+                    <div class="relative">
+                        <img src="./assets/project1.png" alt="E-commerce Website" class="w-full h-48 object-cover">
+                        <div class="absolute inset-0 bg-primary-500 bg-opacity-20 hover:bg-opacity-0 transition-all duration-300"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-200">E-commerce Website</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            A fully responsive e-commerce platform with product filtering, cart functionality, and payment integration.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-sm">React</span>
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-sm">Redux</span>
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-sm">Tailwind CSS</span>
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-sm">Stripe</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="#" class="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded transition-colors duration-300">
+                                <i class="fas fa-globe mr-2"></i>Live Demo
+                            </a>
+                            <a href="#" class="px-4 py-2 bg-gray-800 dark:bg-gray-700 hover:bg-gray-900 dark:hover:bg-gray-600 text-white rounded transition-colors duration-300">
+                                <i class="fab fa-github mr-2"></i>GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden opacity-0">
+                    <div class="relative">
+                        <img src="./assets/project2.png" alt="Dashboard UI" class="w-full h-48 object-cover">
+                        <div class="absolute inset-0 bg-primary-500 bg-opacity-20 hover:bg-opacity-0 transition-all duration-300"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-200">Dashboard UI</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            A modern admin dashboard with data visualization, user management, and real-time analytics.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-sm">Vue.js</span>
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-sm">Chart.js</span>
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-sm">Firebase</span>
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-sm">Tailwind CSS</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="#" class="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded transition-colors duration-300">
+                                <i class="fas fa-globe mr-2"></i>Live Demo
+                            </a>
+                            <a href="#" class="px-4 py-2 bg-gray-800 dark:bg-gray-700 hover:bg-gray-900 dark:hover:bg-gray-600 text-white rounded transition-colors duration-300">
+                                <i class="fab fa-github mr-2"></i>GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden opacity-0">
+                    <div class="relative">
+                        <img src="./assets/project3.png" alt="Mobile App UI" class="w-full h-48 object-cover">
+                        <div class="absolute inset-0 bg-primary-500 bg-opacity-20 hover:bg-opacity-0 transition-all duration-300"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-200">Mobile App UI</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            A fitness tracking app with workout plans, progress tracking, and social features.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-sm">React Native</span>
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-sm">Redux</span>
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-sm">Node.js</span>
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-sm">MongoDB</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="#" class="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded transition-colors duration-300">
+                                <i class="fas fa-globe mr-2"></i>Live Demo
+                            </a>
+                            <a href="#" class="px-4 py-2 bg-gray-800 dark:bg-gray-700 hover:bg-gray-900 dark:hover:bg-gray-600 text-white rounded transition-colors duration-300">
+                                <i class="fab fa-github mr-2"></i>GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden opacity-0">
+                    <div class="relative">
+                        <img src="./assets/project4.png" alt="Weather App" class="w-full h-48 object-cover">
+                        <div class="absolute inset-0 bg-primary-500 bg-opacity-20 hover:bg-opacity-0 transition-all duration-300"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-200">Weather App</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            A weather application with location detection, 7-day forecast, and animated weather conditions.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-sm">JavaScript</span>
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-sm">OpenWeather API</span>
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-sm">GSAP</span>
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-sm">CSS3</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="#" class="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded transition-colors duration-300">
+                                <i class="fas fa-globe mr-2"></i>Live Demo
+                            </a>
+                            <a href="#" class="px-4 py-2 bg-gray-800 dark:bg-gray-700 hover:bg-gray-900 dark:hover:bg-gray-600 text-white rounded transition-colors duration-300">
+                                <i class="fab fa-github mr-2"></i>GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 5 -->
+                <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden opacity-0">
+                    <div class="relative">
+                        <img src="./assets/project5.png" alt="Portfolio Website" class="w-full h-48 object-cover">
+                        <div class="absolute inset-0 bg-primary-500 bg-opacity-20 hover:bg-opacity-0 transition-all duration-300"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-200">Portfolio Website</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            A creative portfolio website for a photographer with gallery, filtering, and contact form.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-sm">HTML5</span>
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-sm">CSS3</span>
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-sm">JavaScript</span>
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-sm">GSAP</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="#" class="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded transition-colors duration-300">
+                                <i class="fas fa-globe mr-2"></i>Live Demo
+                            </a>
+                            <a href="#" class="px-4 py-2 bg-gray-800 dark:bg-gray-700 hover:bg-gray-900 dark:hover:bg-gray-600 text-white rounded transition-colors duration-300">
+                                <i class="fab fa-github mr-2"></i>GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 6 -->
+                <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden opacity-0">
+                    <div class="relative">
+                        <img src="./assets/project6.png" alt="Task Manager" class="w-full h-48 object-cover">
+                        <div class="absolute inset-0 bg-primary-500 bg-opacity-20 hover:bg-opacity-0 transition-all duration-300"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-200">Task Manager</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            A productivity app with task management, reminders, and progress tracking features.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-sm">React</span>
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-sm">Firebase</span>
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-sm">Material UI</span>
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-sm">PWA</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="#" class="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded transition-colors duration-300">
+                                <i class="fas fa-globe mr-2"></i>Live Demo
+                            </a>
+                            <a href="#" class="px-4 py-2 bg-gray-800 dark:bg-gray-700 hover:bg-gray-900 dark:hover:bg-gray-600 text-white rounded transition-colors duration-300">
+                                <i class="fab fa-github mr-2"></i>GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-6 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 relative">
+                My Skills
+                <span class="block w-20 h-1 bg-primary-500 mx-auto mt-4"></span>
+            </h2>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 mb-16">
+                <!-- HTML -->
+                <div class="skill-icon flex flex-col items-center opacity-0">
+                    <div class="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-white dark:bg-gray-700 rounded-full shadow-md mb-3">
+                        <i class="fab fa-html5 text-3xl md:text-4xl text-orange-500"></i>
+                    </div>
+                    <span class="text-gray-700 dark:text-gray-300 font-medium">HTML5</span>
+                </div>
+                
+                <!-- CSS -->
+                <div class="skill-icon flex flex-col items-center opacity-0">
+                    <div class="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-white dark:bg-gray-700 rounded-full shadow-md mb-3">
+                        <i class="fab fa-css3-alt text-3xl md:text-4xl text-blue-500"></i>
+                    </div>
+                    <span class="text-gray-700 dark:text-gray-300 font-medium">CSS3</span>
+                </div>
+                
+                <!-- JavaScript -->
+                <div class="skill-icon flex flex-col items-center opacity-0">
+                    <div class="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-white dark:bg-gray-700 rounded-full shadow-md mb-3">
+                        <i class="fab fa-js text-3xl md:text-4xl text-yellow-400"></i>
+                    </div>
+                    <span class="text-gray-700 dark:text-gray-300 font-medium">JavaScript</span>
+                </div>
+                
+                <!-- React -->
+                <div class="skill-icon flex flex-col items-center opacity-0">
+                    <div class="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-white dark:bg-gray-700 rounded-full shadow-md mb-3">
+                        <i class="fab fa-react text-3xl md:text-4xl text-blue-400"></i>
+                    </div>
+                    <span class="text-gray-700 dark:text-gray-300 font-medium">React</span>
+                </div>
+                
+                <!-- Vue -->
+                <div class="skill-icon flex flex-col items-center opacity-0">
+                    <div class="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-white dark:bg-gray-700 rounded-full shadow-md mb-3">
+                        <i class="fab fa-vuejs text-3xl md:text-4xl text-green-500"></i>
+                    </div>
+                    <span class="text-gray-700 dark:text-gray-300 font-medium">Vue.js</span>
+                </div>
+                
+                <!-- Node.js -->
+                <div class="skill-icon flex flex-col items-center opacity-0">
+                    <div class="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-white dark:bg-gray-700 rounded-full shadow-md mb-3">
+                        <i class="fab fa-node-js text-3xl md:text-4xl text-green-600"></i>
+                    </div>
+                    <span class="text-gray-700 dark:text-gray-300 font-medium">Node.js</span>
+                </div>
+                
+                <!-- Sass -->
+                <div class="skill-icon flex flex-col items-center opacity-0">
+                    <div class="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-white dark:bg-gray-700 rounded-full shadow-md mb-3">
+                        <i class="fab fa-sass text-3xl md:text-4xl text-pink-500"></i>
+                    </div>
+                    <span class="text-gray-700 dark:text-gray-300 font-medium">Sass</span>
+                </div>
+                
+                <!-- Git -->
+                <div class="skill-icon flex flex-col items-center opacity-0">
+                    <div class="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-white dark:bg-gray-700 rounded-full shadow-md mb-3">
+                        <i class="fab fa-git-alt text-3xl md:text-4xl text-orange-600"></i>
+                    </div>
+                    <span class="text-gray-700 dark:text-gray-300 font-medium">Git</span>
+                </div>
+                
+                <!-- Figma -->
+                <div class="skill-icon flex flex-col items-center opacity-0">
+                    <div class="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-white dark:bg-gray-700 rounded-full shadow-md mb-3">
+                        <i class="fab fa-figma text-3xl md:text-4xl text-purple-500"></i>
+                    </div>
+                    <span class="text-gray-700 dark:text-gray-300 font-medium">Figma</span>
+                </div>
+                
+                <!-- Bootstrap -->
+                <div class="skill-icon flex flex-col items-center opacity-0">
+                    <div class="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-white dark:bg-gray-700 rounded-full shadow-md mb-3">
+                        <i class="fab fa-bootstrap text-3xl md:text-4xl text-purple-600"></i>
+                    </div>
+                    <span class="text-gray-700 dark:text-gray-300 font-medium">Bootstrap</span>
+                </div>
+                
+                <!-- Tailwind -->
+                <div class="skill-icon flex flex-col items-center opacity-0">
+                    <div class="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-white dark:bg-gray-700 rounded-full shadow-md mb-3">
+                        <svg class="w-10 h-10 md:w-12 md:h-12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 6C9.6 6 8.1 7.2 7.5 9.6C8.4 8.4 9.45 7.95 10.65 8.25C11.3729 8.4236 11.9106 8.9725 12.5062 9.5812C13.4813 10.5768 14.6374 11.7499 16.5 11.7499C18.9 11.7499 20.4 10.5499 21 8.1499C20.1 9.3499 19.05 9.7999 17.85 9.4999C17.1271 9.3262 16.5894 8.7774 15.9938 8.1687C15.0187 7.173 13.8626 5.9999 12 5.9999V6ZM7.5 11.7499C5.1 11.7499 3.6 12.9499 3 15.3499C3.9 14.1499 4.95 13.6999 6.15 13.9999C6.87292 14.1736 7.41064 14.7224 8.00624 15.3312C8.98127 16.3268 10.1374 17.4999 12 17.4999C14.4 17.4999 15.9 16.2999 16.5 13.8999C15.6 15.0999 14.55 15.5499 13.35 15.2499C12.6271 15.0762 12.0894 14.5274 11.4938 13.9187C10.5187 12.923 9.36261 11.7499 7.5 11.7499Z" fill="#38BDF8"/>
+                        </svg>
+                    </div>
+                    <span class="text-gray-700 dark:text-gray-300 font-medium">Tailwind</span>
+                </div>
+                
+                <!-- TypeScript -->
+                <div class="skill-icon flex flex-col items-center opacity-0">
+                    <div class="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-white dark:bg-gray-700 rounded-full shadow-md mb-3">
+                        <svg class="w-10 h-10 md:w-12 md:h-12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 3H21V21H3V3Z" fill="#3178C6"/>
+                            <path d="M13.0908 17.4665V19.1811H14.9292V17.4665H16.2454V19.1811H18.0838V20.8957H16.2454V22.6103H14.9292V20.8957H13.0908V17.4665Z" fill="#3178C6"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.3146 11.4587V12.9172H14.5268C14.3841 13.6063 14.0987 14.1518 13.6706 14.5537C13.0998 15.0992 12.2434 15.3719 11.1004 15.3719C9.95744 15.3719 9.00025 14.9701 8.22887 14.1664C7.45749 13.3627 7.0718 12.3154 7.0718 11.0244C7.0718 9.73347 7.45749 8.68615 8.22887 7.88244C9.00025 7.07873 9.95744 6.67688 11.1004 6.67688C11.8718 6.67688 12.5574 6.83596 13.1571 7.15413C13.7569 7.4723 14.2138 7.90956 14.5279 8.46592L16.0151 7.45401C15.5297 6.65029 14.8441 6.01303 13.9582 5.54222C13.0723 5.07141 12.0866 4.836 11.0011 4.836C10.0868 4.836 9.23613 5.00599 8.44904 5.34597C7.66195 5.68595 6.98916 6.15676 6.43068 6.7584C5.8722 7.36004 5.43802 8.07276 5.12814 8.89657C4.81826 9.72037 4.66333 10.6078 4.66333 11.5589C4.66333 12.51 4.81826 13.3974 5.12814 14.2212C5.43802 15.045 5.8722 15.7577 6.43068 16.3594C6.98916 16.961 7.66195 17.4318 8.44904 17.7718C9.23613 18.1118 10.0868 18.2818 11.0011 18.2818C12.0866 18.2818 13.0723 18.0464 13.9582 17.5756C14.8441 17.1048 15.5297 16.4675 16.0151 15.6638C16.5005 14.8601 16.7432 13.9272 16.7432 12.8653C16.7432 12.5471 16.7146 12.2289 16.6574 11.9107C16.6002 11.5925 16.5144 11.3026 16.4 11.0408H11.3146V11.4587Z" fill="white"/>
+                        </svg>
+                    </div>
+                    <span class="text-gray-700 dark:text-gray-300 font-medium">TypeScript</span>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Frontend Skills -->
+                <div class="bg-white dark:bg-gray-700 rounded-xl shadow-lg p-6 opacity-0" id="frontendSkills">
+                    <h3 class="text-xl font-semibold mb-6 text-primary-600 dark:text-primary-400">Frontend Development</h3>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700 dark:text-gray-300">HTML/CSS</span>
+                                <span class="text-gray-700 dark:text-gray-300">95%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5">
+                                <div class="bg-primary-500 h-2.5 rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700 dark:text-gray-300">JavaScript</span>
+                                <span class="text-gray-700 dark:text-gray-300">90%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5">
+                                <div class="bg-primary-500 h-2.5 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700 dark:text-gray-300">React</span>
+                                <span class="text-gray-700 dark:text-gray-300">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5">
+                                <div class="bg-primary-500 h-2.5 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700 dark:text-gray-300">Vue.js</span>
+                                <span class="text-gray-700 dark:text-gray-300">80%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5">
+                                <div class="bg-primary-500 h-2.5 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700 dark:text-gray-300">Responsive Design</span>
+                                <span class="text-gray-700 dark:text-gray-300">95%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5">
+                                <div class="bg-primary-500 h-2.5 rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Backend Skills -->
+                <div class="bg-white dark:bg-gray-700 rounded-xl shadow-lg p-6 opacity-0" id="backendSkills">
+                    <h3 class="text-xl font-semibold mb-6 text-primary-600 dark:text-primary-400">Other Skills</h3>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700 dark:text-gray-300">UI/UX Design</span>
+                                <span class="text-gray-700 dark:text-gray-300">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5">
+                                <div class="bg-primary-500 h-2.5 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700 dark:text-gray-300">Node.js</span>
+                                <span class="text-gray-700 dark:text-gray-300">75%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5">
+                                <div class="bg-primary-500 h-2.5 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700 dark:text-gray-300">Git/GitHub</span>
+                                <span class="text-gray-700 dark:text-gray-300">90%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5">
+                                <div class="bg-primary-500 h-2.5 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700 dark:text-gray-300">Figma/Adobe XD</span>
+                                <span class="text-gray-700 dark:text-gray-300">80%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5">
+                                <div class="bg-primary-500 h-2.5 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700 dark:text-gray-300">Performance Optimization</span>
+                                <span class="text-gray-700 dark:text-gray-300">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5">
+                                <div class="bg-primary-500 h-2.5 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-6 bg-white dark:bg-gray-900 transition-colors duration-300">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 relative">
+                Get In Touch
+                <span class="block w-20 h-1 bg-primary-500 mx-auto mt-4"></span>
+            </h2>
+            
+            <div class="flex flex-col md:flex-row gap-12">
+                <div class="md:w-1/2 opacity-0" id="contactInfo">
+                    <h3 class="text-2xl font-semibold mb-6 text-primary-600 dark:text-primary-400">Contact Information</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 flex items-center justify-center bg-primary-100 dark:bg-primary-900/30 text-primary-500 rounded-full mr-4">
+                                <i class="fas fa-envelope text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-1">Email</h4>
+                                <a href="mailto:john.doe@example.com" class="text-gray-600 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">john.doe@example.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 flex items-center justify-center bg-primary-100 dark:bg-primary-900/30 text-primary-500 rounded-full mr-4">
+                                <i class="fas fa-phone text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-1">Phone</h4>
+                                <a href="tel:+11234567890" class="text-gray-600 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">+1 (123) 456-7890</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 flex items-center justify-center bg-primary-100 dark:bg-primary-900/30 text-primary-500 rounded-full mr-4">
+                                <i class="fas fa-map-marker-alt text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-1">Location</h4>
+                                <p class="text-gray-600 dark:text-gray-400">San Francisco, California</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-10">
+                        <h3 class="text-2xl font-semibold mb-6 text-primary-600 dark:text-primary-400">Follow Me</h3>
+                        
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-12 h-12 flex items-center justify-center bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-primary-500 hover:text-white dark:hover:bg-primary-500 rounded-full transition-colors duration-300">
+                                <i class="fab fa-linkedin-in text-xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 flex items-center justify-center bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-primary-500 hover:text-white dark:hover:bg-primary-500 rounded-full transition-colors duration-300">
+                                <i class="fab fa-github text-xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 flex items-center justify-center bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-primary-500 hover:text-white dark:hover:bg-primary-500 rounded-full transition-colors duration-300">
+                                <i class="fab fa-twitter text-xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 flex items-center justify-center bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-primary-500 hover:text-white dark:hover:bg-primary-500 rounded-full transition-colors duration-300">
+                                <i class="fab fa-dribbble text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2 opacity-0" id="contactForm">
+                    <h3 class="text-2xl font-semibold mb-6 text-primary-600 dark:text-primary-400">Send Me a Message</h3>
+                    
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-gray-700 dark:text-gray-300 mb-2">Name</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200" required>
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-gray-700 dark:text-gray-300 mb-2">Email</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200" required>
+                        </div>
+                        
+                        <div>
+                            <label for="subject" class="block text-gray-700 dark:text-gray-300 mb-2">Subject</label>
+                            <input type="text" id="subject" name="subject" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200" required>
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-gray-700 dark:text-gray-300 mb-2">Message</label>
+                            <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="px-6 py-3 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors duration-300 shadow-md w-full">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-6 bg-gray-800 dark:bg-gray-950 text-white transition-colors duration-300">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <a href="#" class="text-2xl font-bold text-primary-400">JD</a>
+                </div>
+                
+                <div class="flex space-x-6 mb-4 md:mb-0">
+                    <a href="#home" class="text-gray-400 hover:text-white transition-colors">Home</a>
+                    <a href="#about" class="text-gray-400 hover:text-white transition-colors">About</a>
+                    <a href="#projects" class="text-gray-400 hover:text-white transition-colors">Projects</a>
+                    <a href="#skills" class="text-gray-400 hover:text-white transition-colors">Skills</a>
+                    <a href="#contact" class="text-gray-400 hover:text-white transition-colors">Contact</a>
+                </div>
+                
+                <div>
+                    <p class="text-gray-400">&copy; 2025 John Doe. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const mobileThemeToggle = document.getElementById('mobileThemeToggle');
+        const html = document.documentElement;
+        
+        // Check for saved theme preference or use system preference
+        const savedTheme = localStorage.getItem('theme');
+        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        const initialTheme = savedTheme || systemTheme;
+        
+        // Apply initial theme
+        if (initialTheme === 'dark') {
+            html.classList.add('dark');
+        }
+        
+        // Theme toggle function
+        function toggleTheme() {
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+        
+        themeToggle.addEventListener('click', toggleTheme);
+        mobileThemeToggle.addEventListener('click', toggleTheme);
+        
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when clicking on a link
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+        
+        // Scroll to Top Button
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                scrollToTopBtn.classList.remove('opacity-0', 'invisible');
+                scrollToTopBtn.classList.add('opacity-100', 'visible');
+            } else {
+                scrollToTopBtn.classList.remove('opacity-100', 'visible');
+                scrollToTopBtn.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Contact Form Submission
+        const contactForm = document.getElementById('contact-form');
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(contactForm);
+            const formDataObj = Object.fromEntries(formData.entries());
+            
+            // Here you would typically send the data to a server
+            // For demo purposes, we'll just log it and show a success message
+            console.log('Form submitted:', formDataObj);
+            
+            // Show success message
+            alert('Thank you for your message! I will get back to you soon.');
+            
+            // Reset form
+            contactForm.reset();
+        });
+        
+        // GSAP Animations
+        document.addEventListener('DOMContentLoaded', () => {
+            // Register ScrollTrigger plugin
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Hero Section Animations
+            gsap.to('#heroTitle', {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: 'power3.out'
+            });
+            
+            gsap.to('#heroSubtitle', {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                delay: 0.3,
+                ease: 'power3.out'
+            });
+            
+            gsap.to('#heroText', {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                delay: 0.6,
+                ease: 'power3.out'
+            });
+            
+            gsap.to('#heroButtons', {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                delay: 0.9,
+                ease: 'power3.out'
+            });
+            
+            gsap.to('#heroImage', {
+                opacity: 1,
+                x: 0,
+                duration: 0.8,
+                delay: 1.2,
+                ease: 'power3.out'
+            });
+            
+            // About Section Animations
+            gsap.to('#aboutImage', {
+                opacity: 1,
+                x: 0,
+                duration: 0.8,
+                scrollTrigger: {
+                    trigger: '#about',
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                }
+            });
+            
+            gsap.to('#aboutText', {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                scrollTrigger: {
+                    trigger: '#about',
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                }
+            });
+            
+            gsap.to('#timeline', {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                delay: 0.3,
+                scrollTrigger: {
+                    trigger: '#about',
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                }
+            });
+            
+            // Projects Section Animations
+            const projectCards = document.querySelectorAll('.project-card');
+            projectCards.forEach((card, index) => {
+                gsap.to(card, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.6,
+                    delay: index * 0.2,
+                    scrollTrigger: {
+                        trigger: '#projects',
+                        start: 'top 80%',
+                        toggleActions: 'play none none none'
+                    }
+                });
+            });
+            
+            // Skills Section Animations
+            const skillIcons = document.querySelectorAll('.skill-icon');
+            skillIcons.forEach((icon, index) => {
+                gsap.to(icon, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.5,
+                    delay: index * 0.1,
+                    scrollTrigger: {
+                        trigger: '#skills',
+                        start: 'top 80%',
+                        toggleActions: 'play none none none'
+                    }
+                });
+            });
+            
+            gsap.to('#frontendSkills', {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                scrollTrigger: {
+                    trigger: '#skills',
+                    start: 'top 60%',
+                    toggleActions: 'play none none none'
+                }
+            });
+            
+            gsap.to('#backendSkills', {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                delay: 0.3,
+                scrollTrigger: {
+                    trigger: '#skills',
+                    start: 'top 60%',
+                    toggleActions: 'play none none none'
+                }
+            });
+            
+            // Contact Section Animations
+            gsap.to('#contactInfo', {
+                opacity: 1,
+                x: 0,
+                duration: 0.8,
+                scrollTrigger: {
+                    trigger: '#contact',
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                }
+            });
+            
+            gsap.to('#contactForm', {
+                opacity: 1,
+                x: 0,
+                duration: 0.8,
+                delay: 0.3,
+                scrollTrigger: {
+                    trigger: '#contact',
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                }
+            });
+            
+            // Typing Effect
+            const typingText = document.getElementById('typingText');
+            const text = "Frontend Developer & UI/UX Designer";
+            let i = 0;
+            
+            function typeWriter() {
+                if (i < text.length) {
+                    typingText.textContent = text.substring(0, i + 1);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                } else {
+                    typingText.classList.add('typing');
+                }
+            }
+            
+            setTimeout(typeWriter, 1500);
+        });
+    </script>
+</body>
+</html>
