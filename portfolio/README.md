@@ -29,12 +29,12 @@ A clean, elegant, and responsive personal portfolio website built with HTML, Tai
 
 1. Clone the repository:
    \`\`\`
-   git clone https://github.com/yourusername/personal-portfolio.git
+   git https://github.com/Andx-cyber/personalwebsite.git
    \`\`\`
 
 2. Navigate to the project directory:
    \`\`\`
-   cd personal-portfolio
+   cd portfolio
    \`\`\`
 
 3. Open the `index.html` file in your browser to view the website locally.
@@ -62,6 +62,5 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## Credits
 
-- Placeholder images from [placeholder.svg](https://placeholder.svg)
 - Icons from [Font Awesome](https://fontawesome.com)
 - Fonts from [Google Fonts](https://fonts.google.com)
